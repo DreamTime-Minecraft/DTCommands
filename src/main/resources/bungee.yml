@@ -1,0 +1,4 @@
+name: DTCommands
+version: ${project.version}
+main: ru.buseso.dreamtime.dtcommands.DTCommands;
+description: Simple Tickets
