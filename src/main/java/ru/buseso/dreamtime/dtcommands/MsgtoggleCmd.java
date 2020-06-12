@@ -15,12 +15,11 @@ public class MsgtoggleCmd extends Command {
         if(sender instanceof ProxiedPlayer) {
             ProxiedPlayer p = (ProxiedPlayer)sender;
 
-            if(DTCommands.msgDisabled.contains(p)) {
+            if(DTCommands.msgDisabled.remove(p.getName())) {
                 p.sendMessage(new TextComponent("§aВы включили личные сообщения!"));
-                DTCommands.msgDisabled.remove(p);
             } else {
                 p.sendMessage(new TextComponent("§cВы выключили личные сообщения!"));
-                DTCommands.msgDisabled.add(p);
+                DTCommands.msgDisabled.add(p.getName());
             }
         }
     }

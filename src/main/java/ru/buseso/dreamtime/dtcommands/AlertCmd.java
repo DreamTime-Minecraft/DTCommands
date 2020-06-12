@@ -20,12 +20,7 @@ public class AlertCmd extends Command {
         if(args.length == 0) {
             sender.sendMessage(new TextComponent("§cВведите сообщение!"));
         } else {
-            StringBuilder b = new StringBuilder();
-            for (String arg : args) {
-                b.append(arg).append(" ");
-            }
-
-            String msg = b.toString().replaceAll("&","§");
+            String msg = String.join(" ", args).replaceAll("&","§");
 
             ProxyServer.getInstance().broadcast(new TextComponent("§8[§cОБЪЯВЛЕНИЕ ОТ §6"+sender.getName()+"§8] §7"+msg));
         }

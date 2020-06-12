@@ -7,7 +7,9 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class ListCmd extends Command {
     public ListCmd(String name) {
@@ -22,14 +24,14 @@ public class ListCmd extends Command {
 
                 Collection<ProxiedPlayer> pl = p.getServer().getInfo().getPlayers();
 
-                StringBuilder sb = new StringBuilder();
+                List<String> slist = new ArrayList<>();
                 for (ProxiedPlayer pp : pl) {
-                    sb.append(pp.getName()).append(", ");
+                    slist.add(pp.getName());
                 }
 
                 TextComponent text = new TextComponent("§eИгроки на реалме §8(%online%)§e: §7%players%"
                         .replaceAll("%online%", "" + pl.size())
-                        .replaceAll("%players%", sb.toString().substring(0, sb.toString().length() - 2)));
+                        .replaceAll("%players%", String.join(", ", slist)));
 
                 if (p.hasPermission("dreamtime.cmd.list.info")) {
                     TextComponent[] tc = new TextComponent[1];

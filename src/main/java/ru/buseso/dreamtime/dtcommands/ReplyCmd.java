@@ -1,13 +1,15 @@
 package ru.buseso.dreamtime.dtcommands;
 
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class ReplyCmd extends Command {
-    public ReplyCmd(String name) {
-        super(name);
+
+    public ReplyCmd(String name, String permission, String... aliases) {
+        super(name, permission, aliases);
     }
 
     @Override
@@ -17,36 +19,33 @@ public class ReplyCmd extends Command {
                 sender.sendMessage(new TextComponent("§cВведите сообщение!"));
                 return;
             }
-            ProxiedPlayer p = (ProxiedPlayer)sender;
 
-            Reply rep = new Reply();
-            for(Reply reply : DTCommands.reply) {
-                if(reply.getOne().equals(p) || reply.getTwo().equals(p)) {
-                    rep = reply;
-                }
+            // Если сообщения отключены
+            if (DTCommands.msgDisabled.contains(sender.getName())) {
+                sender.sendMessage(new TextComponent("§cУ Вас выключены сообщения! Включить их можно командой /msgtoggle"));
             }
-
-            StringBuilder b = new StringBuilder();
-            for (String arg : args) {
-                b.append(arg).append(" ");
+            // Если ни с кем не переписывался
+            String target = DTCommands.getReply().get(sender.getName());
+            if (target == null){
+                sender.sendMessage(new TextComponent("§cУ вас нет действующих диалогов!"));
+                return;
             }
-
-            String msg = b.toString();
-
-            //If one
-            if(rep.getOne().equals(p)) {
-                if(DTCommands.msgDisabled.contains(rep.getTwo())) {
-                    p.sendMessage(new TextComponent("§cУ Вашего собеседника отключены личные сообщения!"));
-                } else {
-                    p.sendMessage(new TextComponent("§b"+p.getName()+" §e-> §b"+rep.getTwo().getName()+"§e: §7"+msg));
-                }
-            } /* If two */ else if(rep.getTwo().equals(p)) {
-                if(DTCommands.msgDisabled.contains(rep.getOne())) {
-                    p.sendMessage(new TextComponent("§cУ Вашего собеседника отключены личные сообщения!"));
-                } else {
-                    p.sendMessage(new TextComponent("§b"+p.getName()+" §e-> §b"+rep.getTwo().getName()+"§e: §7"+msg));
-                }
+            // Если чел вышел
+            ProxiedPlayer playerTarget = ProxyServer.getInstance().getPlayer(target);
+            if (playerTarget == null) {
+                sender.sendMessage(new TextComponent("§cВаш собеседник вышел с сервера!"));
+                return;
             }
+            if (DTCommands.msgDisabled.contains(playerTarget.getName())) {
+                sender.sendMessage(new TextComponent("§cУ Вашего собеседника отключены личные сообщения!"));
+                return;
+            }
+            String msg = String.join(" ", args);
+
+            DTCommands.getReply().put(playerTarget.getName(), sender.getName());
+            sender.sendMessage(new TextComponent("§b"+sender.getName()+" §e-> §b"+playerTarget.getName()+"§e: §7"+msg));
+            playerTarget.sendMessage(new TextComponent("§b"+sender.getName()+" §e-> §b"+playerTarget.getName()+"§e: §7"+msg));
+            System.out.println("§7Player "+sender.getName()+" sent to player "+playerTarget.getName()+" message §f"+msg);
 
         } else {
             sender.sendMessage(new TextComponent("§cКоманда доступна только игрокам!"));
