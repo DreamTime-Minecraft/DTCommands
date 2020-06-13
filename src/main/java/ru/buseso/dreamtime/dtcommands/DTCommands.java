@@ -20,7 +20,7 @@ public final class DTCommands extends Plugin implements Listener {
         PluginManager pm = getProxy().getPluginManager();
 
         pm.registerCommand(this, new ListCmd("list"));
-        pm.registerCommand(this, new MsgCmd("msg", null, "m"));
+        pm.registerCommand(this, new MsgCmd("msg", null, "m","tell","w","t"));
         pm.registerCommand(this, new ReplyCmd("reply", null, "r"));
         pm.registerCommand(this, new MsgtoggleCmd("msgtoggle"));
         pm.registerCommand(this, new AlertCmd("alert"));

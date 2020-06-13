@@ -13,16 +13,16 @@ public class AlertCmd extends Command {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if(!sender.hasPermission("dreamtime.cmd.alert")) {
-            sender.sendMessage(new TextComponent("§cУ Вас недостаточно прав!"));
+            sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cУ Вас недостаточно прав!")));
             return;
         }
 
         if(args.length == 0) {
-            sender.sendMessage(new TextComponent("§cВведите сообщение!"));
+            sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cВведите сообщение!")));
         } else {
             String msg = String.join(" ", args).replaceAll("&","§");
 
-            ProxyServer.getInstance().broadcast(new TextComponent("§8[§cОБЪЯВЛЕНИЕ ОТ §6"+sender.getName()+"§8] §7"+msg));
+            ProxyServer.getInstance().broadcast(new TextComponent(TextComponent.fromLegacyText("§8[§cОБЪЯВЛЕНИЕ ОТ §6"+sender.getName()+"§8] §7"+msg)));
         }
     }
 }

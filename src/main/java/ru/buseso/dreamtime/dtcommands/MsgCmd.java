@@ -23,17 +23,17 @@ public class MsgCmd extends Command implements TabExecutor {
             ProxiedPlayer p = (ProxiedPlayer)sender;
 
             if(DTCommands.msgDisabled.contains(p.getName())) {
-                p.sendMessage(new TextComponent("§cУ Вас выключены сообщения! Включить их можно командой /msgtoggle"));
+                p.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cУ Вас выключены сообщения! Включить их можно командой /msgtoggle")));
             } else {
                 if(args.length <= 1) {
-                    p.sendMessage(new TextComponent("§cПожалуйста, укажите ник и сообщение!"));
+                    p.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cПожалуйста, укажите ник и сообщение!")));
                 } else {
                     ProxiedPlayer target = ProxyServer.getInstance().getPlayer(args[0]);
                     if(target == null) {
-                        p.sendMessage(new TextComponent("§cИгрок не найден!"));
+                        p.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cИгрок не найден!")));
                     } else {
                         if(DTCommands.msgDisabled.contains(target.getName())) {
-                            p.sendMessage(new TextComponent("§cУ игрока выключены сообщения!"));
+                            p.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cУ игрока выключены сообщения!")));
                         } else {
                             String msg = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
 
@@ -51,7 +51,7 @@ public class MsgCmd extends Command implements TabExecutor {
                 }
             }
         } else {
-            sender.sendMessage(new TextComponent("§cКоманда доступна только игрокам!"));
+            sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cКоманда доступна только игрокам!")));
         }
     }
 

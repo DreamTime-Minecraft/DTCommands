@@ -16,28 +16,28 @@ public class ReplyCmd extends Command {
     public void execute(CommandSender sender, String[] args) {
         if(sender instanceof ProxiedPlayer) {
             if(args.length == 0) {
-                sender.sendMessage(new TextComponent("§cВведите сообщение!"));
+                sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cВведите сообщение!")));
                 return;
             }
 
             // Если сообщения отключены
             if (DTCommands.msgDisabled.contains(sender.getName())) {
-                sender.sendMessage(new TextComponent("§cУ Вас выключены сообщения! Включить их можно командой /msgtoggle"));
+                sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cУ Вас выключены сообщения! Включить их можно командой /msgtoggle")));
             }
             // Если ни с кем не переписывался
             String target = DTCommands.getReply().get(sender.getName());
             if (target == null){
-                sender.sendMessage(new TextComponent("§cУ вас нет действующих диалогов!"));
+                sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cУ вас нет действующих диалогов!")));
                 return;
             }
             // Если чел вышел
             ProxiedPlayer playerTarget = ProxyServer.getInstance().getPlayer(target);
             if (playerTarget == null) {
-                sender.sendMessage(new TextComponent("§cВаш собеседник вышел с сервера!"));
+                sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cВаш собеседник вышел с сервера!")));
                 return;
             }
             if (DTCommands.msgDisabled.contains(playerTarget.getName())) {
-                sender.sendMessage(new TextComponent("§cУ Вашего собеседника отключены личные сообщения!"));
+                sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cУ Вашего собеседника отключены личные сообщения!")));
                 return;
             }
             String msg = String.join(" ", args);
@@ -48,7 +48,7 @@ public class ReplyCmd extends Command {
             System.out.println("§7Player "+sender.getName()+" sent to player "+playerTarget.getName()+" message §f"+msg);
 
         } else {
-            sender.sendMessage(new TextComponent("§cКоманда доступна только игрокам!"));
+            sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cКоманда доступна только игрокам!")));
         }
     }
 }

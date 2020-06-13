@@ -28,13 +28,13 @@ public class GlobalListCmd extends Command {
                 slist.add(pp.getName());
             }
 
-            TextComponent text = new TextComponent("§eИгроки на сервере §8(%online%)§e: §7%players%"
+            TextComponent text = new TextComponent(TextComponent.fromLegacyText("§eИгроки на сервере §8(%online%)§e: §7%players%"
                     .replaceAll("%online%", "" + pl.size())
-                    .replaceAll("%players%", String.join(", ", slist)));
+                    .replaceAll("%players%", String.join(", ", slist))));
 
             sender.sendMessage(text);
         } else {
-            sender.sendMessage(new TextComponent("§cУ Вас недостаточно прав для данной команды!"));
+            sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cУ Вас недостаточно прав для данной команды!")));
         }
     }
 }

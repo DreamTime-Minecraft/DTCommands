@@ -11,11 +11,11 @@ public class ContactCmd extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        TextComponent text = new TextComponent("§0\n§aСвязь с нами:" +
+        TextComponent text = new TextComponent(TextComponent.fromLegacyText("§0\n§aСвязь с нами:" +
                 "\n§7Сайт §5https://dreamtime.su" +
                 "\n§7Группа ВК §9https://vk.com/mc_dreamtime" +
                 "\n§7Сервер DS §bhttps://discord.gg/jWQZ2Wy" +
-                "\n");
+                "\n"));
         sender.sendMessage(text);
     }
 }

@@ -26,12 +26,12 @@ public class ListCmd extends Command {
 
                 List<String> slist = new ArrayList<>();
                 for (ProxiedPlayer pp : pl) {
-                    slist.add(pp.getName());
+                    if(!pp.hasPermission("dreamtime.cmd.list.bypass")) slist.add(pp.getName());
                 }
 
-                TextComponent text = new TextComponent("§eИгроки на реалме §8(%online%)§e: §7%players%"
-                        .replaceAll("%online%", "" + pl.size())
-                        .replaceAll("%players%", String.join(", ", slist)));
+                TextComponent text = new TextComponent(TextComponent.fromLegacyText("§eИгроки на реалме §8(%online%)§e: §7%players%"
+                        .replaceAll("%online%",""+pl.size())
+                        .replaceAll("%players%", String.join(", ", slist))));
 
                 if (p.hasPermission("dreamtime.cmd.list.info")) {
                     TextComponent[] tc = new TextComponent[1];
@@ -41,11 +41,11 @@ public class ListCmd extends Command {
 
                 p.sendMessage(text);
             } else {
-                sender.sendMessage(new TextComponent("§cУ Вас недостаточно прав для данной команды!"));
+                sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cУ Вас недостаточно прав для данной команды!")));
             }
         } else {
             if(args.length == 0) {
-                sender.sendMessage(new TextComponent("§cВведите название реалма!"));
+                sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cВведите название реалма!")));
             } else {
                 Collection<ProxiedPlayer> pl = ProxyServer.getInstance().getServerInfo(args[0]).getPlayers();
 
