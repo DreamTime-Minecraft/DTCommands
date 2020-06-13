@@ -16,9 +16,9 @@ public class MsgtoggleCmd extends Command {
             ProxiedPlayer p = (ProxiedPlayer)sender;
 
             if(DTCommands.msgDisabled.remove(p.getName())) {
-                p.sendMessage(new TextComponent(TextComponent.fromLegacyText("§aВы включили личные сообщения!")));
+                p.sendMessage(TextComponent.fromLegacyText("§aВы включили личные сообщения!"));
             } else {
-                p.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cВы выключили личные сообщения!")));
+                p.sendMessage(TextComponent.fromLegacyText("§cВы выключили личные сообщения!"));
                 DTCommands.msgDisabled.add(p.getName());
             }
         }

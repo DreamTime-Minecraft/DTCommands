@@ -2,6 +2,7 @@ package ru.buseso.dreamtime.dtcommands;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -34,18 +35,17 @@ public class ListCmd extends Command {
                         .replaceAll("%players%", String.join(", ", slist))));
 
                 if (p.hasPermission("dreamtime.cmd.list.info")) {
-                    TextComponent[] tc = new TextComponent[1];
-                    tc[0] = new TextComponent("§7Реалм: §b"+p.getServer().getInfo().getName());
+                    BaseComponent[] tc = TextComponent.fromLegacyText("§7Реалм: §b"+p.getServer().getInfo().getName());
                     text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, tc));
                 }
 
                 p.sendMessage(text);
             } else {
-                sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cУ Вас недостаточно прав для данной команды!")));
+                sender.sendMessage(TextComponent.fromLegacyText("§cУ Вас недостаточно прав для данной команды!"));
             }
         } else {
             if(args.length == 0) {
-                sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cВведите название реалма!")));
+                sender.sendMessage(TextComponent.fromLegacyText("§cВведите название реалма!"));
             } else {
                 Collection<ProxiedPlayer> pl = ProxyServer.getInstance().getServerInfo(args[0]).getPlayers();
 
@@ -54,9 +54,10 @@ public class ListCmd extends Command {
                     sb.append(pp.getName()).append(", ");
                 }
 
-                TextComponent text = new TextComponent("§eИгроки на реалме §8(%online%)§e: §7%players%"
+                BaseComponent[] text = TextComponent.fromLegacyText("§eИгроки на реалме §8(%online%)§e: §7%players%"
                         .replaceAll("%online%", "" + pl.size())
                         .replaceAll("%players%", sb.toString().substring(0, sb.toString().length() - 2)));
+                sender.sendMessage(text);
             }
         }
     }

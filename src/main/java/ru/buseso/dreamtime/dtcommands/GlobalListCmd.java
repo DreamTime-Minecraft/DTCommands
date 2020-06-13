@@ -2,6 +2,7 @@ package ru.buseso.dreamtime.dtcommands;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -28,13 +29,13 @@ public class GlobalListCmd extends Command {
                 slist.add(pp.getName());
             }
 
-            TextComponent text = new TextComponent(TextComponent.fromLegacyText("§eИгроки на сервере §8(%online%)§e: §7%players%"
+            BaseComponent[] text = TextComponent.fromLegacyText("§eИгроки на сервере §8(%online%)§e: §7%players%"
                     .replaceAll("%online%", "" + pl.size())
-                    .replaceAll("%players%", String.join(", ", slist))));
+                    .replaceAll("%players%", String.join(", ", slist)));
 
             sender.sendMessage(text);
         } else {
-            sender.sendMessage(new TextComponent(TextComponent.fromLegacyText("§cУ Вас недостаточно прав для данной команды!")));
+            sender.sendMessage(TextComponent.fromLegacyText("§cУ Вас недостаточно прав для данной команды!"));
         }
     }
 }
