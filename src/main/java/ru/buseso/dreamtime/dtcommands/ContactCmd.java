@@ -1,22 +1,29 @@
 package ru.buseso.dreamtime.dtcommands;
 
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class ContactCmd extends Command {
-    public ContactCmd(String name) {
-        super(name);
+
+    public ContactCmd(String name, String permission, String... aliases) {
+        super(name, permission, aliases);
     }
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        BaseComponent[] text = TextComponent.fromLegacyText("§0\n§aСвязь с нами:" +
-                "\n§7Сайт §5https://dreamtime.su" +
-                "\n§7Группа ВК §9https://vk.com/mc_dreamtime" +
-                "\n§7Сервер DS §bhttps://discord.gg/xTwTYVX" +
-                "\n");
-        sender.sendMessage(text);
+
+        TextComponent component = new TextComponent(
+                new TextComponent("§0\n§aСвязь с нами:"),
+                new TextComponent("\n§7Сайт: "),
+                new ComponentBuilder("§edreamtime.su").event(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://dreamtime.su")).getCurrentComponent(),
+                new TextComponent("\n§7Группа ВК: "),
+                new ComponentBuilder("§evk.com/mc_dreamtime").event(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://vk.com/mc_dreamtime")).getCurrentComponent(),
+                new TextComponent("\n§7Сервер DS: "),
+                new ComponentBuilder("§ediscord.gg/xTwTYVX").event(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/xTwTYVX")).getCurrentComponent()
+        );
+        sender.sendMessage(component);
     }
 }

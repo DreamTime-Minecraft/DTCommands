@@ -24,7 +24,7 @@ public final class DTCommands extends Plugin implements Listener {
         pm.registerCommand(this, new ReplyCmd("reply", null, "r"));
         pm.registerCommand(this, new MsgtoggleCmd("msgtoggle"));
         pm.registerCommand(this, new AlertCmd("alert"));
-        pm.registerCommand(this, new ContactCmd("contact"));
+        pm.registerCommand(this, new ContactCmd("contacts", null, "contact"));
         pm.registerCommand(this, new GlobalListCmd("globallist", null, "glist"));
         pm.registerListener(this, this);
     }
