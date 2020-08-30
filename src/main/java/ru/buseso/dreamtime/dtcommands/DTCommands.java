@@ -5,6 +5,7 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
 import net.md_5.bungee.event.EventHandler;
+import ru.buseso.dreamtime.dtcommands.commands.*;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
