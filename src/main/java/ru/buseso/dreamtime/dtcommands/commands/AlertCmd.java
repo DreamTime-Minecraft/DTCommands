@@ -7,7 +7,7 @@ import net.md_5.bungee.api.plugin.Command;
 
 public class AlertCmd extends Command {
     public AlertCmd(String name) {
-        super(name);
+        super(name, "dreamtime.cmd.alert");
     }
 
     @Override

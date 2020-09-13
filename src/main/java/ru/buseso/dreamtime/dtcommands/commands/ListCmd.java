@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ListCmd extends Command {
     public ListCmd(String name) {
-        super(name);
+        super(name, "dreamtime.cmd.list");
     }
 
     @Override
