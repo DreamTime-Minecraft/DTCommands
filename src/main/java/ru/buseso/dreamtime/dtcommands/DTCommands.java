@@ -9,19 +9,15 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 import net.md_5.bungee.event.EventHandler;
 import ru.buseso.dreamtime.dtcommands.commands.*;
+import ru.buseso.dreamtime.dtcommands.msg.MsgSystem;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public final class DTCommands extends Plugin implements Listener {
 
-    public static Set<String> msgDisabled = ConcurrentHashMap.newKeySet();
-    //public static List<Reply> reply = new ArrayList<>();
-    private static Map<String, String> reply = new ConcurrentHashMap<>();
     private static Configuration config;
     private static DTCommands instance;
     @Override
@@ -30,9 +26,9 @@ public final class DTCommands extends Plugin implements Listener {
         PluginManager pm = getProxy().getPluginManager();
 
         loadConfig();
-
         pm.registerCommand(this, new ListCmd("list"));
         pm.registerCommand(this, new MsgCmd("msg", null, "m","tell","w","t"));
+        pm.registerCommand(this, new SocialspyCommand("socialspy", "dreamtime.cmd.socialspy"));
         pm.registerCommand(this, new ReplyCmd("reply", null, "r"));
         pm.registerCommand(this, new MsgtoggleCmd("msgtoggle"));
         pm.registerCommand(this, new AlertCmd("alert"));
@@ -43,14 +39,9 @@ public final class DTCommands extends Plugin implements Listener {
         pm.registerListener(this, this);
     }
 
-    public static Map<String, String> getReply() {
-        return reply;
-    }
-
     @EventHandler
     public void Disconnect(PlayerDisconnectEvent event) {
-        reply.remove(event.getPlayer().getName());
-        msgDisabled.remove(event.getPlayer().getName());
+        MsgSystem.leave(event.getPlayer());
     }
 
     public static Configuration getConfig() {

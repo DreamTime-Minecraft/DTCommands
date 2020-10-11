@@ -4,7 +4,7 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
-import ru.buseso.dreamtime.dtcommands.DTCommands;
+import ru.buseso.dreamtime.dtcommands.msg.MsgSystem;
 
 public class MsgtoggleCmd extends Command {
     public MsgtoggleCmd(String name) {
@@ -16,11 +16,11 @@ public class MsgtoggleCmd extends Command {
         if(sender instanceof ProxiedPlayer) {
             ProxiedPlayer p = (ProxiedPlayer)sender;
 
-            if(DTCommands.msgDisabled.remove(p.getName())) {
+            if(MsgSystem.msgDisabled.remove(p.getName())) {
                 p.sendMessage(TextComponent.fromLegacyText("§aВы включили личные сообщения!"));
             } else {
                 p.sendMessage(TextComponent.fromLegacyText("§cВы выключили личные сообщения!"));
-                DTCommands.msgDisabled.add(p.getName());
+                MsgSystem.msgDisabled.add(p.getName());
             }
         }
     }

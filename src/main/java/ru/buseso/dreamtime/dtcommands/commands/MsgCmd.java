@@ -7,7 +7,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
-import ru.buseso.dreamtime.dtcommands.DTCommands;
+import ru.buseso.dreamtime.dtcommands.msg.MsgSystem;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,8 +24,8 @@ public class MsgCmd extends Command implements TabExecutor {
         if(sender instanceof ProxiedPlayer) {
             ProxiedPlayer p = (ProxiedPlayer)sender;
 
-            if(DTCommands.msgDisabled.contains(p.getName())) {
-                p.sendMessage(TextComponent.fromLegacyText("§cУ Вас выключены сообщения! Включить их можно командой /msgtoggle"));
+            if(MsgSystem.msgDisabled.contains(p.getName())) {
+                p.sendMessage(TextComponent.fromLegacyText("§cУ Вас выключены сообщения! Включить их можно командой §e/msgtoggle"));
             } else {
                 if(args.length <= 1) {
                     p.sendMessage(TextComponent.fromLegacyText("§cПожалуйста, укажите ник и сообщение!"));
@@ -34,21 +34,8 @@ public class MsgCmd extends Command implements TabExecutor {
                     if(target == null) {
                         p.sendMessage(TextComponent.fromLegacyText("§cИгрок не найден!"));
                     } else {
-                        if(DTCommands.msgDisabled.contains(target.getName())) {
-                            p.sendMessage(TextComponent.fromLegacyText("§cУ игрока выключены сообщения!"));
-                        } else {
-                            String msg = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
-
-                            BaseComponent[] text = (TextComponent.fromLegacyText("§b" + p.getName() + " §e-> §b" + target.getName() + "§e: §7" + msg));
-
-                            p.sendMessage(text);
-                            target.sendMessage(text);
-
-                            DTCommands.getReply().put(p.getName(), target.getName());
-                            DTCommands.getReply().put(target.getName(), p.getName());
-
-                            System.out.println("§7Player "+p.getName()+" sent to player "+target.getName()+" message §f"+msg);
-                        }
+                        String msg = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+                        MsgSystem.sendMessage(p, target, msg);
                     }
                 }
             }
