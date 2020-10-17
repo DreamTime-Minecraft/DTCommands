@@ -5,13 +5,17 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.api.plugin.TabExecutor;
 import ru.buseso.dreamtime.dtcommands.msg.MsgSystem;
 import ru.buseso.dreamtime.dtcommands.utils.Utils;
 
-public class IgnoreCommand extends Command {
+import java.util.HashSet;
+import java.util.Set;
 
-    public IgnoreCommand(String name, String permission, String... aliases) {
-        super(name, permission, aliases);
+public class IgnoreCommand extends Command implements TabExecutor {
+
+    public IgnoreCommand() {
+        super("ignore");
     }
 
     @Override
@@ -31,13 +35,28 @@ public class IgnoreCommand extends Command {
             p.sendMessage(TextComponent.fromLegacyText("§cИгрок не найден!"));
             return;
         }
-        if (p.hasPermission(this.getPermission())) {
-            if (MsgSystem.ignore(p, other)) {
-                sender.sendMessage(Utils.coloredComponents("&cТеперь вы игнорируете игрока &e" + other.getName()));
-                sender.sendMessage(Utils.coloredComponents("&cЧтобы убрать его из игнора, напишите ещё раз &e/ignore " + other.getName()));
-            } else {
-                sender.sendMessage(Utils.coloredComponents("&aВы больше не игнорируете игрока &e" + other.getName()));
+        if (MsgSystem.ignore(p, other)) {
+            sender.sendMessage(Utils.coloredComponents("&7Теперь вы игнорируете игрока &c" + other.getName()));
+            sender.sendMessage(Utils.coloredComponents("&7Чтобы убрать его из игнора, напишите ещё раз &e/ignore " + other.getName()));
+        } else {
+            sender.sendMessage(Utils.coloredComponents("&7Вы больше не игнорируете игрока &a" + other.getName()));
+        }
+    }
+
+    @Override
+    public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
+        Set<String> match = new HashSet<>();
+        if (args.length == 1) {
+            String search = args[0].toLowerCase();
+            for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers()) {
+                if (!MsgSystem.msgDisabled.contains(player.getName()) && !player.getName().equalsIgnoreCase(sender.getName())) {
+
+                    if (player.getName().toLowerCase().startsWith(search.toLowerCase())) {
+                        match.add(player.getName());
+                    }
+                }
             }
         }
+        return match;
     }
 }

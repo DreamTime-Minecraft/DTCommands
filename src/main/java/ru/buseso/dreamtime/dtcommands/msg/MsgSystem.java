@@ -41,6 +41,7 @@ public class MsgSystem {
         } else {
             if (isIgnored(target, sender)) {
                 sender.sendMessage(Utils.coloredComponents("&cВы не можете писать этому игроку!"));
+                return;
             }
             BaseComponent[] msgToSender = TextComponent.fromLegacyText(Utils.coloredText("&8[&aВы &7-> &a" + target.getName() + "&8]: &f") + msg);
             BaseComponent[] msgToTarget = TextComponent.fromLegacyText(Utils.coloredText("&8[&a" + sender.getName() + " &7-> &aВам&8]: &f") + msg);
@@ -96,6 +97,7 @@ public class MsgSystem {
         if (ignored == null) {
             ignored = new HashSet<>();
             ignored.add(other.getName());
+            ignoreList.put(player.getName(), ignored);
             return true;
         } else {
             // Если игрок был в игноре, убираем его оттуда

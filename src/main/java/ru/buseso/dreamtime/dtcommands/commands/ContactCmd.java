@@ -8,8 +8,8 @@ import net.md_5.bungee.api.plugin.Command;
 
 public class ContactCmd extends Command {
 
-    public ContactCmd(String name, String permission, String... aliases) {
-        super(name, permission, aliases);
+    public ContactCmd() {
+        super("contacts", null, "contact");
     }
 
     @Override

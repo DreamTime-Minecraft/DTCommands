@@ -13,8 +13,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class ListCmd extends Command {
-    public ListCmd(String name) {
-        super(name, "dreamtime.cmd.list");
+    public ListCmd() {
+        super("list", "dreamtime.cmd.list");
     }
 
     @Override

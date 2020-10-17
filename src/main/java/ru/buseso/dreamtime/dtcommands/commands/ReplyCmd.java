@@ -9,8 +9,8 @@ import ru.buseso.dreamtime.dtcommands.msg.MsgSystem;
 
 public class ReplyCmd extends Command {
 
-    public ReplyCmd(String name, String permission, String... aliases) {
-        super(name, permission, aliases);
+    public ReplyCmd() {
+        super("reply", null, "r");
     }
 
     @Override

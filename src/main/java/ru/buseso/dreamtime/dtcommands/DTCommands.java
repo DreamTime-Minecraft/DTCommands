@@ -26,16 +26,17 @@ public final class DTCommands extends Plugin implements Listener {
         PluginManager pm = getProxy().getPluginManager();
 
         loadConfig();
-        pm.registerCommand(this, new ListCmd("list"));
-        pm.registerCommand(this, new MsgCmd("msg", null, "m","tell","w","t"));
-        pm.registerCommand(this, new SocialspyCommand("socialspy", "dreamtime.cmd.socialspy"));
-        pm.registerCommand(this, new ReplyCmd("reply", null, "r"));
-        pm.registerCommand(this, new MsgtoggleCmd("msgtoggle"));
-        pm.registerCommand(this, new AlertCmd("alert"));
-        pm.registerCommand(this, new ContactCmd("contacts", null, "contact"));
-        pm.registerCommand(this, new GlobalListCmd("globallist", "dreamtime.cmd.globallist", "glist"));
-        pm.registerCommand(this, new DTCommandsCmd("dtcommands", "dreamtime.cmd.admin", "dtc"));
-        pm.registerCommand(this, new RulesCommand("rules"));
+        pm.registerCommand(this, new ListCmd());
+        pm.registerCommand(this, new MsgCmd());
+        pm.registerCommand(this, new SocialspyCommand());
+        pm.registerCommand(this, new IgnoreCommand());
+        pm.registerCommand(this, new ReplyCmd());
+        pm.registerCommand(this, new MsgtoggleCmd());
+        pm.registerCommand(this, new AlertCmd());
+        pm.registerCommand(this, new ContactCmd());
+        pm.registerCommand(this, new GlobalListCmd());
+        pm.registerCommand(this, new DTCommandsCmd());
+        pm.registerCommand(this, new RulesCommand());
         pm.registerListener(this, this);
     }
 

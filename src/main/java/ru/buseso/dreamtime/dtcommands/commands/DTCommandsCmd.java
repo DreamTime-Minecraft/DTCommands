@@ -6,8 +6,8 @@ import ru.buseso.dreamtime.dtcommands.DTCommands;
 
 public class DTCommandsCmd extends Command {
 
-    public DTCommandsCmd(String name, String permission, String... aliases) {
-        super(name, permission, aliases);
+    public DTCommandsCmd() {
+        super("dtcommands", "dreamtime.cmd.admin", "dtc");
     }
 
     @Override

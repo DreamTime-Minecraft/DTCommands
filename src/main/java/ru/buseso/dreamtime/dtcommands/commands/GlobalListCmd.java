@@ -14,8 +14,8 @@ import java.util.List;
 
 public class GlobalListCmd extends Command {
 
-    public GlobalListCmd(String name, String permission, String... aliases) {
-        super(name, permission, aliases);
+    public GlobalListCmd() {
+        super("globallist", "dreamtime.cmd.globallist", "glist");
     }
 
     @Override

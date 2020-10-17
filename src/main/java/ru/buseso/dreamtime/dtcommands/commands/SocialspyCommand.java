@@ -8,8 +8,8 @@ import ru.buseso.dreamtime.dtcommands.msg.MsgSystem;
 
 public class SocialspyCommand extends Command {
 
-    public SocialspyCommand(String name, String permission, String... aliases) {
-        super(name, permission, aliases);
+    public SocialspyCommand() {
+        super("socialspy", "dreamtime.cmd.socialspy");
     }
 
     @Override

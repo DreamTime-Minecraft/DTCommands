@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RulesCommand extends Command {
-    public RulesCommand(String name)
+    public RulesCommand()
     {
-        super(name, null, "rule", "rul");
+
+        super("rules", null, "rule", "rul");
     }
 
     @Override

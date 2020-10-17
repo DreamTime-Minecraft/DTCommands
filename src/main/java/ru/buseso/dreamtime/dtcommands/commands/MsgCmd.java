@@ -15,8 +15,8 @@ import java.util.Set;
 
 public class MsgCmd extends Command implements TabExecutor {
 
-    public MsgCmd(String name, String permission, String... aliases) {
-        super(name, permission, aliases);
+    public MsgCmd() {
+        super("msg", null, "m","tell","w","t");
     }
 
     @Override
@@ -50,8 +50,10 @@ public class MsgCmd extends Command implements TabExecutor {
         if (args.length == 1) {
             String search = args[0].toLowerCase();
             for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers()) {
-                if (player.getName().toLowerCase().startsWith(search)) {
-                    match.add(player.getName());
+                if (!MsgSystem.msgDisabled.contains(player.getName())) {
+                    if (player.getName().toLowerCase().startsWith(search)) {
+                        match.add(player.getName());
+                    }
                 }
             }
         }

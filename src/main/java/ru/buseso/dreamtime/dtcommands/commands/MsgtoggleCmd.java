@@ -7,8 +7,8 @@ import net.md_5.bungee.api.plugin.Command;
 import ru.buseso.dreamtime.dtcommands.msg.MsgSystem;
 
 public class MsgtoggleCmd extends Command {
-    public MsgtoggleCmd(String name) {
-        super(name);
+    public MsgtoggleCmd() {
+        super("msgtoggle");
     }
 
     @Override

@@ -6,8 +6,8 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class AlertCmd extends Command {
-    public AlertCmd(String name) {
-        super(name, "dreamtime.cmd.alert");
+    public AlertCmd() {
+        super("alert", "dreamtime.cmd.alert");
     }
 
     @Override
